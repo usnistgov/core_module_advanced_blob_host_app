@@ -6,11 +6,11 @@ from core_main_app.components.blob.utils import get_blob_download_uri
 from core_module_advanced_blob_host_app.views.forms import URLForm
 from core_module_blob_host_app.views.forms import BLOBHostForm
 from core_module_blob_host_app.views.views import BlobHostModule
-from core_parser_app.tools.modules.views.builtin.popup_module import PopupModule
+from core_parser_app.tools.modules.views.builtin.popup_module import AbstractPopupModule
 from core_parser_app.tools.modules.views.module import AbstractModule
 
 
-class AdvancedBlobHostModule(PopupModule):
+class AdvancedBlobHostModule(AbstractPopupModule):
     def __init__(self):
         """Initialize module
 
@@ -18,8 +18,8 @@ class AdvancedBlobHostModule(PopupModule):
         popup_content = AbstractModule.render_template('core_module_advanced_blob_host_app/advanced_blob_host.html',
                                                        {'url_form': URLForm(), 'file_form': BLOBHostForm()})
 
-        PopupModule.__init__(self, popup_content=popup_content, button_label='Upload File',
-                             scripts=['core_module_advanced_blob_host_app/js/advanced_blob_host.js'])
+        AbstractPopupModule.__init__(self, popup_content=popup_content, button_label='Upload File',
+                                     scripts=['core_module_advanced_blob_host_app/js/advanced_blob_host.js'])
 
     def _retrieve_data(self, request):
         """ Return module display - GET method
