@@ -15,3 +15,10 @@ Quick start
       ...
       'core_module_advanced_blob_host_app',
     ]
+
+2. Include the core_module_advanced_blob_host_app URLconf in your project urls.py
+---------------------------------------------------------------------
+
+.. code:: python
+
+    url(r'^', include('core_module_advanced_blob_host_app.urls')),
