@@ -15,11 +15,17 @@ class AdvancedBlobHostModule(AbstractPopupModule):
         """Initialize module
 
         """
-        popup_content = AbstractModule.render_template('core_module_advanced_blob_host_app/advanced_blob_host.html',
-                                                       {'url_form': URLForm(), 'file_form': BLOBHostForm()})
-
-        AbstractPopupModule.__init__(self, popup_content=popup_content, button_label='Upload File',
+        AbstractPopupModule.__init__(self, button_label='Upload File',
                                      scripts=['core_module_advanced_blob_host_app/js/advanced_blob_host.js'])
+
+    def _get_popup_content(self):
+        """ Return popup content
+
+        Returns:
+
+        """
+        return AbstractModule.render_template('core_module_advanced_blob_host_app/advanced_blob_host.html',
+                                              {'url_form': URLForm(), 'file_form': BLOBHostForm()})
 
     def _retrieve_data(self, request):
         """ Return module display - GET method
