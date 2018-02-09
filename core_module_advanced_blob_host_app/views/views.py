@@ -52,6 +52,11 @@ class AdvancedBlobHostModule(AbstractPopupModule):
                     self.error = 'Enter a valid URL.'
             elif selected_option == "file":
                 try:
+                    form = BLOBHostForm(request.POST, request.FILES)
+                    if not form.is_valid():
+                        self.error = 'No file uploaded.'
+                        return data
+
                     # get file from request
                     uploaded_file = request.FILES['file']
                     # get filename from file
