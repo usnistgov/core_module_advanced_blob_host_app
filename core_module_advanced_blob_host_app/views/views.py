@@ -1,6 +1,5 @@
 """ Advanced blob host module views
 """
-from builtins import str
 from core_main_app.components.blob import api as blob_api
 from core_main_app.components.blob.models import Blob
 from core_main_app.components.blob.utils import get_blob_download_uri
