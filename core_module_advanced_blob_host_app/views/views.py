@@ -1,5 +1,6 @@
 """ Advanced blob host module views
 """
+from core_module_advanced_blob_host_app.settings import AUTO_ESCAPE_XML_ENTITIES
 from core_main_app.components.blob import api as blob_api
 from core_main_app.components.blob.models import Blob
 from core_main_app.components.blob.utils import get_blob_download_uri
@@ -8,6 +9,7 @@ from core_module_blob_host_app.views.forms import BLOBHostForm
 from core_module_blob_host_app.views.views import BlobHostModule
 from core_parser_app.tools.modules.views.builtin.popup_module import AbstractPopupModule
 from core_parser_app.tools.modules.views.module import AbstractModule
+from xml_utils.xsd_tree.operations.xml_entities import XmlEntities
 
 
 class AdvancedBlobHostModule(AbstractPopupModule):
@@ -38,6 +40,7 @@ class AdvancedBlobHostModule(AbstractPopupModule):
         """
         data = ''
         self.error = None
+        data_xml_entities = XmlEntities()
         if request.method == 'GET':
             if 'data' in request.GET:
                 if len(request.GET['data']) > 0:
@@ -75,7 +78,8 @@ class AdvancedBlobHostModule(AbstractPopupModule):
                     data = get_blob_download_uri(blob, request)
                 except:
                     self.error = 'An error occurred during the upload.'
-        return data
+
+        return data_xml_entities.escape_xml_entities(data) if AUTO_ESCAPE_XML_ENTITIES else data
 
     def _render_data(self, request):
         """ Return module's data rendering
