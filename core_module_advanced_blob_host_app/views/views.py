@@ -4,7 +4,7 @@ from core_module_advanced_blob_host_app.settings import AUTO_ESCAPE_XML_ENTITIES
 from core_main_app.components.blob import api as blob_api
 from core_main_app.components.blob.models import Blob
 from core_main_app.components.blob.utils import get_blob_download_uri
-from core_module_advanced_blob_host_app.views.forms import URLForm
+from core_module_remote_blob_host_app.views.forms import URLForm
 from core_module_blob_host_app.views.forms import BLOBHostForm
 from core_module_blob_host_app.views.views import BlobHostModule
 from core_parser_app.tools.modules.views.builtin.popup_module import AbstractPopupModule
@@ -14,11 +14,12 @@ from xml_utils.xsd_tree.operations.xml_entities import XmlEntities
 
 class AdvancedBlobHostModule(AbstractPopupModule):
     def __init__(self):
-        """Initialize module
-
+        """ Initialize module
         """
-        AbstractPopupModule.__init__(self, button_label='Upload File',
-                                     scripts=['core_module_advanced_blob_host_app/js/advanced_blob_host.js'])
+        AbstractPopupModule.__init__(
+            self, button_label='Upload File',
+            scripts=['core_module_advanced_blob_host_app/js/advanced_blob_host.js']
+        )
 
     def _get_popup_content(self):
         """ Return popup content
@@ -26,8 +27,10 @@ class AdvancedBlobHostModule(AbstractPopupModule):
         Returns:
 
         """
-        return AbstractModule.render_template('core_module_advanced_blob_host_app/advanced_blob_host.html',
-                                              {'url_form': URLForm(), 'file_form': BLOBHostForm()})
+        return AbstractModule.render_template(
+            'core_module_advanced_blob_host_app/advanced_blob_host.html',
+            {'url_form': URLForm(), 'file_form': BLOBHostForm()}
+        )
 
     def _retrieve_data(self, request):
         """ Return module display - GET method
@@ -79,7 +82,8 @@ class AdvancedBlobHostModule(AbstractPopupModule):
                 except:
                     self.error = 'An error occurred during the upload.'
 
-        return data_xml_entities.escape_xml_entities(data) if AUTO_ESCAPE_XML_ENTITIES else data
+        return data_xml_entities.escape_xml_entities(data) \
+            if AUTO_ESCAPE_XML_ENTITIES else data
 
     def _render_data(self, request):
         """ Return module's data rendering
