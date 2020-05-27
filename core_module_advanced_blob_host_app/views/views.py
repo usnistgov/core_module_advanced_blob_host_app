@@ -17,8 +17,9 @@ class AdvancedBlobHostModule(AbstractPopupModule):
         """ Initialize module
         """
         AbstractPopupModule.__init__(
-            self, button_label='Upload File',
-            scripts=['core_module_advanced_blob_host_app/js/advanced_blob_host.js']
+            self,
+            button_label="Upload File",
+            scripts=["core_module_advanced_blob_host_app/js/advanced_blob_host.js"],
         )
 
     def _get_popup_content(self):
@@ -28,8 +29,8 @@ class AdvancedBlobHostModule(AbstractPopupModule):
 
         """
         return AbstractModule.render_template(
-            'core_module_advanced_blob_host_app/advanced_blob_host.html',
-            {'url_form': URLForm(), 'file_form': BLOBHostForm()}
+            "core_module_advanced_blob_host_app/advanced_blob_host.html",
+            {"url_form": URLForm(), "file_form": BLOBHostForm()},
         )
 
     def _retrieve_data(self, request):
@@ -41,30 +42,30 @@ class AdvancedBlobHostModule(AbstractPopupModule):
         Returns:
 
         """
-        data = ''
+        data = ""
         self.error = None
         data_xml_entities = XmlEntities()
-        if request.method == 'GET':
-            if 'data' in request.GET:
-                if len(request.GET['data']) > 0:
-                    data = request.GET['data']
-        elif request.method == 'POST':
-            selected_option = request.POST['blob_form']
+        if request.method == "GET":
+            if "data" in request.GET:
+                if len(request.GET["data"]) > 0:
+                    data = request.GET["data"]
+        elif request.method == "POST":
+            selected_option = request.POST["blob_form"]
             if selected_option == "url":
                 url_form = URLForm(request.POST)
                 if url_form.is_valid():
-                    data = url_form.data['url']
+                    data = url_form.data["url"]
                 else:
-                    self.error = 'Enter a valid URL.'
+                    self.error = "Enter a valid URL."
             elif selected_option == "file":
                 try:
                     form = BLOBHostForm(request.POST, request.FILES)
                     if not form.is_valid():
-                        self.error = 'No file uploaded.'
+                        self.error = "No file uploaded."
                         return data
 
                     # get file from request
-                    uploaded_file = request.FILES['file']
+                    uploaded_file = request.FILES["file"]
                     # get filename from file
                     filename = uploaded_file.name
                     # get user id from request
@@ -80,10 +81,13 @@ class AdvancedBlobHostModule(AbstractPopupModule):
                     # get download uri
                     data = get_blob_download_uri(blob, request)
                 except:
-                    self.error = 'An error occurred during the upload.'
+                    self.error = "An error occurred during the upload."
 
-        return data_xml_entities.escape_xml_entities(data) \
-            if AUTO_ESCAPE_XML_ENTITIES else data
+        return (
+            data_xml_entities.escape_xml_entities(data)
+            if AUTO_ESCAPE_XML_ENTITIES
+            else data
+        )
 
     def _render_data(self, request):
         """ Return module's data rendering
