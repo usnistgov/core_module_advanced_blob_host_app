@@ -1,10 +1,13 @@
-var advancedBlobHostPopupOptions = {
+/** Advanced Blob Host script */
+let saveAdvancedBlobHostData = function() {
+    return new FormData($($("#modal-" + moduleElement[0].id)[0]).find(".advanced-blob-host-form")[0]);
+};
+console.log("ssss")
+let advancedBlobHostPopupOptions = {
     title: "Select a file",
+    getData: saveAdvancedBlobHostData
 }
 
-var saveAdvancedBlobHostData = function() {
-    return new FormData(openPopUp.find('.advanced-blob-host-form')[0]);
-};
 
 // FIXME: update url?
-configurePopUp('module-advanced-blob-host', advancedBlobHostPopupOptions, saveAdvancedBlobHostData);
+configurePopUp('module-advanced-blob-host', advancedBlobHostPopupOptions);
