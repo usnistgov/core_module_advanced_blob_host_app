@@ -1,12 +1,9 @@
 """ Advanced blob host module views
 """
 from core_module_advanced_blob_host_app.settings import AUTO_ESCAPE_XML_ENTITIES
-from core_main_app.components.blob import api as blob_api
-from core_main_app.components.blob.models import Blob
-from core_main_app.components.blob.utils import get_blob_download_uri
-from core_module_remote_blob_host_app.views.forms import URLForm
 from core_module_blob_host_app.views.forms import BLOBHostForm
 from core_module_blob_host_app.views.views import BlobHostModule
+from core_module_remote_blob_host_app.views.forms import URLForm
 from core_parser_app.tools.modules.views.builtin.popup_module import AbstractPopupModule
 from core_parser_app.tools.modules.views.module import AbstractModule
 from xml_utils.xsd_tree.operations.xml_entities import XmlEntities
@@ -15,8 +12,7 @@ from xml_utils.xsd_tree.operations.xml_entities import XmlEntities
 class AdvancedBlobHostModule(AbstractPopupModule):
     def __init__(self):
         """Initialize module"""
-        AbstractPopupModule.__init__(
-            self,
+        super().__init__(
             button_label="Upload File",
             scripts=[
                 "core_parser_app/js/commons/file_uploader.js",
@@ -62,10 +58,12 @@ class AdvancedBlobHostModule(AbstractPopupModule):
         data = ""
         self.error = None
         data_xml_entities = XmlEntities()
-        if request.method == "GET":
-            if "data" in request.GET:
-                if len(request.GET["data"]) > 0:
-                    data = request.GET["data"]
+        if (
+            request.method == "GET"
+            and "data" in request.GET
+            and len(request.GET["data"]) > 0
+        ):
+            data = request.GET["data"]
         elif request.method == "POST":
             selected_option = request.POST["blob_form"]
             if selected_option == "url":
@@ -75,30 +73,7 @@ class AdvancedBlobHostModule(AbstractPopupModule):
                 else:
                     self.error = "Enter a valid URL."
             elif selected_option == "file":
-                try:
-                    form = BLOBHostForm(request.POST, request.FILES)
-                    if not form.is_valid():
-                        self.error = "No file uploaded."
-                        return data
-
-                    # get file from request
-                    uploaded_file = request.FILES["file"]
-                    # get filename from file
-                    filename = uploaded_file.name
-                    # get user id from request
-                    user_id = str(request.user.id)
-
-                    # create blob
-                    blob = Blob(filename=filename, user_id=user_id)
-                    # set blob file
-                    blob.blob = uploaded_file
-                    # save blob
-                    blob_api.insert(blob)
-
-                    # get download uri
-                    data = get_blob_download_uri(blob, request)
-                except:
-                    self.error = "An error occurred during the upload."
+                data = BlobHostModule().retrieve_post_data(request)
 
         return (
             data_xml_entities.escape_xml_entities(data)
