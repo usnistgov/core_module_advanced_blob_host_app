@@ -1,0 +1,30 @@
+.advanced-blob-host-form .blob-option {
+    display: flex;
+    height: 3.5rem;
+    align-items: center;
+}
+
+.advanced-blob-host-form .blob-option label {
+    font-weight: normal;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+}
+
+.advanced-blob-host-form .blob-option input[type="url"] {
+    height: calc(1.5em + .75rem + 2px);
+    margin: 0 0 0 0.75rem;
+    width: 100%;
+}
+
+.advanced-blob-host-form .advanced-blob-label-name {
+    min-width: 8em;
+}
+
+.advanced-blob-host-form input[type=radio] {
+    height: 15px;
+}
+
+.advanced-blob-host-form .blob-option .custom-file {
+    margin-left: 0.75rem;
+}

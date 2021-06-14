@@ -1,11 +1,19 @@
 <form class='advanced-blob-host-form'>
     {% csrf_token %}
-    <p>
-         <input type="radio" name="blob_form" value="url">
-         <b>Enter the URL of a file : </b>{{url_form}}
-    </p>
-    <p>
-         <input type="radio" name="blob_form" value="file">
-         <b>Upload a File: </b>{{file_form}}
-    </p>
+    <div>
+        <div class="blob-option flex-nowrap">
+            <input type="radio" name="blob_form" value="url" id="blob-form-url"/>
+            <label for="blob-form-url">
+                <div class="advanced-blob-label-name">Enter URL of a file:</div>
+                {{ url_form }}
+            </label>
+        </div>
+        <div class="blob-option flex-nowrap">
+            <input type="radio" name="blob_form" value="file" id="blob-form-file"/>
+            <label for="blob-form-file">
+                <div class="advanced-blob-label-name">Upload a local file:</div>
+                {% include "core_parser_app/commons/file_uploader.html" with form=file_form module_id=module_id %}
+            </label>
+        </div>
+    </div>
 </form>

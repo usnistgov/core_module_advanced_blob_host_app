@@ -18,7 +18,11 @@ class AdvancedBlobHostModule(AbstractPopupModule):
         AbstractPopupModule.__init__(
             self,
             button_label="Upload File",
-            scripts=["core_module_advanced_blob_host_app/js/advanced_blob_host.js"],
+            scripts=[
+                "core_parser_app/js/commons/file_uploader.js",
+                "core_module_advanced_blob_host_app/js/advanced_blob_host.js",
+            ],
+            styles=["core_module_advanced_blob_host_app/css/advanced_blob_host.css"],
         )
 
     def _get_popup_content(self):
@@ -33,15 +37,16 @@ class AdvancedBlobHostModule(AbstractPopupModule):
             module_id = self.request.GET.get("module_id", None)
 
         # create the from and set an unique id
-        form = BLOBHostForm()
-        form.fields["file"].widget.attrs.update(
+        blob_host_form = BLOBHostForm()
+        blob_host_form.fields["file"].widget.attrs.update(
             {"id": "file-input-%s" % str(module_id)}
         )
         return AbstractModule.render_template(
             "core_module_advanced_blob_host_app/advanced_blob_host.html",
             {
                 "url_form": URLForm(),
-                "file_form": BLOBHostForm(),
+                "file_form": blob_host_form,
+                "module_id": module_id,
             },
         )
 
