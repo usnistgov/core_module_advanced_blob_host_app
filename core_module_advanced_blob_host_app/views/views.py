@@ -1,15 +1,17 @@
 """ Advanced blob host module views
 """
-from core_module_advanced_blob_host_app.settings import AUTO_ESCAPE_XML_ENTITIES
-from core_module_blob_host_app.views.forms import BLOBHostForm
-from core_module_blob_host_app.views.views import BlobHostModule
-from core_module_remote_blob_host_app.views.forms import URLForm
 from core_parser_app.tools.modules.views.builtin.popup_module import AbstractPopupModule
 from core_parser_app.tools.modules.views.module import AbstractModule
 from xml_utils.xsd_tree.operations.xml_entities import XmlEntities
+from core_module_blob_host_app.views.forms import BLOBHostForm
+from core_module_blob_host_app.views.views import BlobHostModule
+from core_module_remote_blob_host_app.views.forms import URLForm
+from core_module_advanced_blob_host_app.settings import AUTO_ESCAPE_XML_ENTITIES
 
 
 class AdvancedBlobHostModule(AbstractPopupModule):
+    """Advanced Blob Host Module"""
+
     def __init__(self):
         """Initialize module"""
         super().__init__(
