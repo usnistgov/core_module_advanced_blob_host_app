@@ -1,4 +1,4 @@
-core-main-app==1.21.*
-core-parser-app==1.21.*
-core-module-blob-host-app==1.21.*
-core-module-remote-blob-host-app==1.21.*
+core-main-app==2.0.0-beta2
+core-parser-app==2.0.0-beta2
+core-module-blob-host-app==2.0.0-beta2
+core-module-remote-blob-host-app==2.0.0-beta2
