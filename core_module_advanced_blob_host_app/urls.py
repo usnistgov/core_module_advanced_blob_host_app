@@ -3,7 +3,9 @@
 
 from django.urls import re_path
 
-from core_module_advanced_blob_host_app.views.views import AdvancedBlobHostModule
+from core_module_advanced_blob_host_app.views.views import (
+    AdvancedBlobHostModule,
+)
 
 urlpatterns = [
     re_path(

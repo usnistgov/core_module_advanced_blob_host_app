@@ -1,12 +1,16 @@
 """ Advanced blob host module views
 """
-from core_parser_app.tools.modules.views.builtin.popup_module import AbstractPopupModule
+from core_parser_app.tools.modules.views.builtin.popup_module import (
+    AbstractPopupModule,
+)
 from core_parser_app.tools.modules.views.module import AbstractModule
 from xml_utils.xsd_tree.operations.xml_entities import XmlEntities
 from core_module_blob_host_app.views.forms import BLOBHostForm
 from core_module_blob_host_app.views.views import BlobHostModule
 from core_module_remote_blob_host_app.views.forms import URLForm
-from core_module_advanced_blob_host_app.settings import AUTO_ESCAPE_XML_ENTITIES
+from core_module_advanced_blob_host_app.settings import (
+    AUTO_ESCAPE_XML_ENTITIES,
+)
 
 
 class AdvancedBlobHostModule(AbstractPopupModule):
@@ -20,7 +24,9 @@ class AdvancedBlobHostModule(AbstractPopupModule):
                 "core_parser_app/js/commons/file_uploader.js",
                 "core_module_advanced_blob_host_app/js/advanced_blob_host.js",
             ],
-            styles=["core_module_advanced_blob_host_app/css/advanced_blob_host.css"],
+            styles=[
+                "core_module_advanced_blob_host_app/css/advanced_blob_host.css"
+            ],
         )
 
     def _get_popup_content(self):
