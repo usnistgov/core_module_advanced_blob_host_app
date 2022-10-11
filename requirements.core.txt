@@ -1,4 +1,4 @@
-core-main-app==2.0.*
-core-parser-app==2.0.*
-core-module-blob-host-app==2.0.*
-core-module-remote-blob-host-app==2.0.*
+core-main-app==2.1.*
+core-parser-app==2.1.*
+core-module-blob-host-app==2.1.*
+core-module-remote-blob-host-app==2.1.*
