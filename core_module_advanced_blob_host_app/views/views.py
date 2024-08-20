@@ -1,5 +1,6 @@
 """ Advanced blob host module views
 """
+
 from core_parser_app.tools.modules.views.builtin.popup_module import (
     AbstractPopupModule,
 )
