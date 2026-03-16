@@ -1,5 +1,4 @@
-""" Url router for the advanced blob host module
-"""
+"""Url router for the advanced blob host module"""
 
 from django.urls import re_path
 
